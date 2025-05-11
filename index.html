@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Cotizador Sofitel</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>   
+    <h1>COTIZADOR SOFITEL RESIDENCES BUENOS AIRES MADERO</h1>
+    <!--Add buttons to initiate auth sequence and sign out-->
+    <button id="authorize_button" disabled>Sign in</button>
+    <button id="refresh_button" disabled>Refresh</button>
+    <button id="signout_button" disabled>Sign out</button>   
+    <div>   
+      <section id="filtros">
+        <h3>Filtrar por: </h3>        
+        <div>Piso: 
+          <select name="piso" id="lista_pisos">
+            <option value="">Seleccionar</option>
+          </select>         
+          Tipología: 
+          <select name="ambientes" id="lista_ambientes">     
+            <option value="">Seleccionar</option>                
+          </select>
+          m2 Totales: 
+          Entre <input type="number" placeholder="Mínimo" id="lista_m2_minimo">
+          y <input type="number" placeholder="Máximo" id="lista_m2_maximo">
+          Orientación: 
+          <select name="orientacion" id="lista_orientaciones">
+            <option value="">Seleccionar</option>            
+          </select>
+          <input type="checkbox" name="disponibles" id="check_disponibles"><label for="check_disponibles">Disponibles</label> 
+          <button id="fetch_filtered_units">Filtrar</button>
+          <button id="reset_filters_button">Borrar</button>
+        </div>          
+      </section>
+      <section id="resultados">
+        <div>
+          <h3>Unidades : </h3>
+          <div>            
+            <select id="lista_unidades_disponibles">          
+              <option value="">Seleccionar</option>
+            </select>
+            <button id="fetch_units_info_button">Ver</button>        
+            <span id="estado">Estado: <span></span>
+            <p>Se encontaron <span id="notif_cantidad_unidades">0</span> unidades</p>
+          </div>          
+        </div>     
+      </section>   
+    </div>
+    <section id="inmueble">
+      <h2>Detalles unidad <span id="unidad_titulo"></span></h2>
+      <div id="caracteristicas">
+        <p id="piso">Piso: <span></span></p>
+        <p id="orientacion">Orientación: <span></span></p>
+        <p id="tipologia">Tipología: <span></span></p>      
+      </div>
+      <div id="caracteristicas2">
+        <h2>Superficies</h2>
+        <p id="superficie_cubierta">m2 Cubiertos: <span></span></p>
+        <p id="superficie_terraza">m2 Terrazas: <span></span></p>
+        <p id="superficie_pallier">m2 Pallier Privado: <span></span></p>
+        <p id="superficie_total">m2 Totales: <span></span></p>
+        <p></p>
+      </div>
+    </section>    
+    <section id="pricing">
+      <div>
+        <h2 id="precio_residencia">Precio de la Residencia: USD <span></span></h2>
+        <p id="identificacion_cochera1">Identificación: <span></span></p>
+        <p id="precio_cochera1">Cochera 1: USD <span></span></p>
+        <p id="identificacion_cochera2">Identificación: <span></span></p>
+        <p id="precio_cochera2">Cochera 2: USD <span></span></p>
+        <!-- <p id="identificacion_baulera">Identificación: <span></span></p> -->
+        <p id="precio_baulera">Baulera: USD <span></span></p>
+        <p id="precio_total">Precio Total: USD <span></span></p>
+      </div>
+      <div id="formas_pago">
+        <h2>Forma de Pago:</h2>
+        <p id="anticipo">Anticipo: 
+          <input class="contenido_variable" id="porcentaje_anticipo" type="number" value="20"> % 
+          USD <span></span>
+        </p>
+        <p id="cuota_inicio_obra">Cuota Inicio Obra: 
+          <input class="contenido_variable" id="porcentaje_cuota_obra" type="number" value="20"> % 
+          USD <span></span>
+        </p>
+        <p id="refuerzo_hito_losa">Refuerzo Hito Losa: 
+          <input class="contenido_variable" id="refuerzo" type="number" value="10"> % 
+          USD <span></span>
+        </p>
+        <p id="saldo">Saldo: 
+          <input disabled class="contenido_variable" type="number" id="saldo_output" value="50"> %
+          USD <span></span>
+        </p>
+        <p id="valor_cuota">Valor Cuota: 
+          <input class="contenido_variable" id="cantidad_cuotas" type="number" value="50"> USD <span></span>
+        </p>
+      </div>
+    </section>    
+    <section id="gastos">
+      <div id="gastos_firma">
+        <h2>Gastos a la firma de C.O.</h2>
+        <p>Brand Fee: <input disabled id="brand_fee" class="contenido_variable" type="number" placeholder="4 %"> USD <span id="output_gastos_firma"></span></p>
+      </div>
+      <div id="gastos_posesion">
+        <h2>Gasto de Posesión</h2>
+        <p>Fondo de la Reserva <input disabled id="fondo_reserva" class="contenido_variable" type="number" value="25" placeholder="25"> <span id="output_fondo_reserva"></span> USD/m2</p>
+        <p>Fondo Operativo de Caja <input disabled id="fondo_operativo_caja" class="contenido_variable" type="number" value="25" placeholder="25"> <span id="output_fondo_operativo_caja"></span> USD/m2</p> 
+        <p>Fondo de Equipamiento <input disabled id="fondo_equipamiento" class="contenido_variable" type="number" value="200" placeholder="200"> <span id="output_fondo_equipamiento"></span> USD/m2</p>
+        <p>Total Gastos: USD <span id="output_total_gastos"></span></p>
+      </div>
+    </section>
+    <pre id="content" style="white-space: pre-wrap;"></pre>
+    <script type="module" src="./index.js"></script>
+    <!-- <script type="text/javascript" src="./auth.js"></script> -->
+    <!-- <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script> -->
+    <!-- <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script> -->
+  </body>
+</html>
