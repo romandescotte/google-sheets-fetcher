@@ -69,11 +69,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
 
     } catch(error) {
-      console.error('Error en la inicialización de datos:', error)
+      console.error('Error en la inicialización de datos:', error);
+      alert('Error al cargar los datos. Por favor, recargue la página.');
     } 
      
   } catch (error) {
-    console.error('Error en la inicialización de la aplicación:', error)
-  }  
+    console.error('Error en la inicialización de la aplicación:', error);
+    alert('Error al iniciar la aplicación. Por favor, recargue la página.');
+  }
+  
 });
 

@@ -20,7 +20,7 @@ async function getListadoUnidades() {
       const respuesta = await gapi.client.sheets.spreadsheets.values.get(
         {
         spreadsheetId: SPREADSHEET_ID,
-        range: 'Listado de Unidades!A13:AC200',
+        range: 'Listado de Unidades!A13:AG200',
         valueRenderOption: 'UNFORMATTED_VALUE'
       });
       const lista = respuesta.result;
