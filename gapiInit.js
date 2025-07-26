@@ -112,7 +112,7 @@ function loadGoogleScripts() {
             createDropdownOptions('lista_orientaciones', generaListaOrientaciones());
           } catch (res) {
             console.error('Error en el callback de tokenClient:', res);
-            // console.error('Error en el callback de tokenClient:', res.error.message);
+            console.error('Error en el callback de tokenClient:', res.error.message);
             throw new Error(`Error en el callback de tokenClient: ${res.error}`);
           }
         },

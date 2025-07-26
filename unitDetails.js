@@ -207,8 +207,8 @@ function calculaFormaPago() {
     }   
     // % ANTICIPO * PRECIO TOTAL  
     formaDePago.montoAnticipo =  redondear((anticipoValue / 100) * precioTotalNumerico)
-    // PRECIO DE LA RESIDENCIA * %CUOTA INICIO OBRA
-    formaDePago.cuotaInicioObra =   redondear((cuotaObraValue / 100) * precioResidenciaNumerico)
+    // % CUOTA INICIO OBRA * PRECIO TOTAL
+    formaDePago.cuotaInicioObra =   redondear((cuotaObraValue / 100) * precioTotalNumerico)
     // PRECIO TOTAL * % REFUERZO HITO LOSA
     formaDePago.refuerzoHitoLosa =  redondear((refuerzoValue / 100) * precioTotalNumerico)
     // % SALDO * PRECIO TOTAL
