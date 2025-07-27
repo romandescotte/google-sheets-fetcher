@@ -26,7 +26,6 @@ $getUnitsInfo.addEventListener('click', async () => {
     muestraPagosYGastos()
   } catch (error) {
     console.error('Error al obtener detalles de la unidad', error);
-    alert(error.message)
   }  
 })
 

@@ -129,6 +129,16 @@ function precioTotal(unidad) {
 }
 
 function calculaMetrosTotales(cubiertos, terraza, pallier) {
+  typeof(cubiertos) !== 'number' 
+  ? cubiertos = 0
+  : cubiertos
+  typeof(terraza) !== 'number' 
+  ? terraza = 0
+  : terraza
+  typeof(pallier) !== 'number'
+  ? pallier = 0
+  : pallier
+
   const metrosTotales = cubiertos + terraza + pallier
   
   updateElementText('#superficie_total span', agregarMilesimas(metrosTotales))  
